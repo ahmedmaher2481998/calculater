@@ -43,20 +43,24 @@ function operate(obj){
     return res;
 
 }
-
 // test 12 + 7 - 5 * 3 = 24
-
 let obj = {a:0,b:0,f:''};
 let result = 0 ;
 let btns = document.querySelectorAll("button")
-bnts = Array.from(btns)
+btns = Array.from(btns);
+
+let digits = btns.filter(btn=>btn.className =="digit");
+let operators =  btns.filter(btn=>btn.className =="operate");
+let clear  = document.querySelector('.clear')
+console.log(clear)
+console.log(digits)
+console.log(operators)
+/*
     bnts.map(btn=>{
         btn.addEventListener('click',function(e){
-            
             if(e.target.className == 'digit'){
             obj.a = parseInt(obj.a+e.target.textContent);
             populate(obj.a) 
-            
             }
             else if(e.target.className == 'operate'){
                 obj.f = e.target.textContent
@@ -73,10 +77,9 @@ bnts = Array.from(btns)
                 obj.f = ''
                 populate('.....Wanna clac somthing !!.....')
             }
-
             console.log(obj)
         })
-    });
+    });*/
 //put somthing on the screeen.
 function populate(pressed){
     
