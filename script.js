@@ -36,6 +36,9 @@ function operate(obj){
     return res;
 
 }
+
+
+
 let obj = {a:0,b:0,f:''};
 let btns = document.querySelectorAll("button")
 bnts = Array.from(btns)
