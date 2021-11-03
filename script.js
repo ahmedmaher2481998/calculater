@@ -12,7 +12,7 @@ function divide(a,b){
 }
 //funcation that takes object {f:"operatro sign ",a:first num , b: second num}
 /*
-ogject={ 
+object={ 
     f:'+',
     a:10,
     b:20
