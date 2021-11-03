@@ -35,4 +35,12 @@ function operate(obj){
     return res;
 
 }    
-
+let  display = document.querySelector('.result .box');
+let btns = document.querySelectorAll("button")
+bnts = Array.from(btns)
+bnts.map(btn=>{ 
+    btn.addEventListener('click',function(){ 
+        let value = btn.textContent;
+        display.textContent=value;
+    })
+})
