@@ -1,3 +1,4 @@
+//basic operations
 function add(a,b){ 
     return a + b;
 }
@@ -34,15 +35,32 @@ function operate(obj){
     }
     return res;
 
-}    
-let  display = document.querySelector('.result .box');
+}
+let obj = {a:0,b:0,f:''};
 let btns = document.querySelectorAll("button")
 bnts = Array.from(btns)
-bnts.map(btn=>{ 
-    let value='';
-    btn.addEventListener('click',function(){ 
-        value += btn.textContent;
+    bnts.map(btn=>{
+        btn.addEventListener('click',function(e){
+            if(e.target.className == 'digit'){
+            obj.a = parseInt(obj.a+e.target.textContent);
+            populate(obj.a) 
+            console.log(obj)
+            }
+            else if(e.target.className == 'operate'){
+                obj.f = e.target.textContent
+                console.log(e.target.textContent)
+                obj.b = operate(obj); 
+                populate(obj.b)
+                obj.a = 0;
+            }
 
-        display.textContent=value;
-    })
-})
+
+        })
+    });
+//put somthing on the screeen.
+function populate(pressed){
+    
+    let  display = document.querySelector('.result .box');
+    let value= pressed;
+    display.textContent=value;    
+}
