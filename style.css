@@ -7,7 +7,7 @@ body{
     display: flex;
     border: 1px solid black;
     border-radius: 20px;
-    background-color: rgba(46, 119, 126, 0.3);
+    background-color: rgba(203, 215, 216, 0.3);
     height: 600px;
     width: 400px;
     margin: 40px auto;

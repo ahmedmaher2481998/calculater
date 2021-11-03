@@ -47,6 +47,7 @@ function operate(obj){
 // test 12 + 7 - 5 * 3 = 24
 
 let obj = {a:0,b:0,f:''};
+let result = 0 ;
 let btns = document.querySelectorAll("button")
 bnts = Array.from(btns)
     bnts.map(btn=>{
