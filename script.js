@@ -33,31 +33,47 @@ function operate(obj){
     else if (obj.f == '/'){ 
          res =  divide(obj.a,obj.b)
     }
+    else if (obj.f == '%'){ 
+        res = obj.a % obj.b ;
+    }
+    else if (obj.f == '+/-'){ 
+        obj.a = - obj.a ;
+        res = obj.b
+    }
     return res;
 
 }
 
-
+// test 12 + 7 - 5 * 3 = 24
 
 let obj = {a:0,b:0,f:''};
 let btns = document.querySelectorAll("button")
 bnts = Array.from(btns)
     bnts.map(btn=>{
         btn.addEventListener('click',function(e){
+            
             if(e.target.className == 'digit'){
             obj.a = parseInt(obj.a+e.target.textContent);
             populate(obj.a) 
-            console.log(obj)
+            
             }
             else if(e.target.className == 'operate'){
                 obj.f = e.target.textContent
-                console.log(e.target.textContent)
                 obj.b = operate(obj); 
                 populate(obj.b)
                 obj.a = 0;
             }
+            else if (e.target.className == 'equal'){ 
+                populate(obj.b)
+                obj.a = 0;
+            }
+            else if (e.target.className == 'clear'){ 
+                obj.a = obj.b = 0;
+                obj.f = ''
+                populate('.....Wanna clac somthing !!.....')
+            }
 
-
+            console.log(obj)
         })
     });
 //put somthing on the screeen.
