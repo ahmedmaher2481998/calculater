@@ -40,21 +40,34 @@ function operate(obj){
         obj.a = - obj.a ;
         res = obj.b
     }
-    return res;
+
+    obj.res = res;
 
 }
 // test 12 + 7 - 5 * 3 = 24
-let obj = {a:0,b:0,f:''};
+let obj = {a:0,f:''};
 let result = 0 ;
 let btns = document.querySelectorAll("button")
 btns = Array.from(btns);
 
 let digits = btns.filter(btn=>btn.className =="digit");
 let operators =  btns.filter(btn=>btn.className =="operate");
-let clear  = document.querySelector('.clear')
-console.log(clear)
-console.log(digits)
-console.log(operators)
+let clear  = Array.from(document.querySelector('.clear'));
+let equal = Array.from(document.querySelector('.equal'));
+let point = Array.from(document.querySelector('.point'));
+operators.map(operator=>{
+    operator.addEventListner('click',function(){
+       if(!obj.b){ 
+           continue;
+       }
+       else { 
+           operate(obj)
+           populate(obj.res)
+
+       }
+    })
+})
+digits
 /*
     bnts.map(btn=>{
         btn.addEventListener('click',function(e){
