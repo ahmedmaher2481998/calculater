@@ -36,14 +36,11 @@ function operate(obj){
     else if (obj.f == '%'){ 
         res = obj.a % obj.b ;
     }
-    else if (obj.f == '+/-'){ 
-        obj.a = - obj.a ;
-        res = obj.b
-    }
 
     return res;
 
 }
+
 // test 12 + 7 - 5 * 3 = 42
 let obj = {a:null, b:null ,f:'' , result:null};
 
@@ -107,14 +104,28 @@ operators.map(operator=>{
         
     })
 })
- 
+document.querySelector('.sign-reverse').addEventListener('click',function(){ 
+    if(obj.a){ 
+        if(obj.b){ 
+            obj.b = -obj.b ; 
+            populate(obj.b)
+        }
+        else { 
+            obj.a = -obj.a ; 
+            populate(obj.a)
+        }
+    }
+
+    
+    
+}) 
 // clear
 clear.addEventListener('click',function() {
     reset()
 populate('.....Wanna clac somthing !!.....')
 });
 equal.addEventListener('click',function(){ 
-    console.log(obj)
+    
     let res  = operate(obj)
     reset();
     populate(res)

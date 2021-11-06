@@ -69,3 +69,7 @@ button{
 #zero{ 
     width: 200%;
 }
+.clear{ 
+    background-color: rgb(210, 234, 241);
+    width: 100%%;
+}
