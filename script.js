@@ -1,4 +1,4 @@
-//basic operations
+//basic operations + - * / 
 function add(a,b){ 
     return a + b;
 }
@@ -41,42 +41,111 @@ function operate(obj){
         res = obj.b
     }
 
-    obj.res = res;
+    return res;
 
 }
-// test 12 + 7 - 5 * 3 = 24
-let obj = {a:0,f:''};
-let result = 0 ;
+// test 12 + 7 - 5 * 3 = 42
+let obj = {a:null, b:null ,f:'' , result:null};
+
 let btns = document.querySelectorAll("button")
 btns = Array.from(btns);
 
 let digits = btns.filter(btn=>btn.className =="digit");
 let operators =  btns.filter(btn=>btn.className =="operate");
-let clear  = Array.from(document.querySelector('.clear'));
-let equal = Array.from(document.querySelector('.equal'));
+let clear  = document.querySelector('.clear');
+let equal = document.querySelector('.equal');
 let point = Array.from(document.querySelector('.point'));
-operators.map(operator=>{
-    operator.addEventListner('click',function(e){
 
-       if(!obj.b){
-           obj.a = obj.a 
-           obj.a - null;
-           obj.f = e.target.textContent
-           
-       }
-       else { 
-           operate(obj)
-           populate(obj.res)
-
-       }
-    })
-})
+// evnt listner to digits 
+let isa ;
 digits.map(digit=>{ 
-    digit.addEventListner('click',function(e){
-        obj.a = e.target.textContent; 
-
+    digit.addEventListener('click',function(e){ 
+       
+        if(!obj.a )obj.a = e.target.textContent ; 
+        else if (!isa) obj.a = obj.a + e.target.textContent
+        obj.a = parseInt(obj.a)
+        populate(obj.a)
+        if(obj.a > 1000000000) {
+            obj={a:null, b:null , f:null,result:null} 
+            populate('reset');
+        }
+        if(isa){ 
+            if(!obj.b) obj.b = e.target.textContent;
+            else obj.b = obj.b + e.target.textContent;
+            obj.b = parseInt(obj.b)
+            populate(obj.b)
+        }
+        
     })
 })
+operators.map(operator=>{ 
+    operator.addEventListener('click',function(e){
+        
+        //if not a store f 
+        if(!obj.a){ 
+            populate("invalid input ");
+        }
+        // if a and b pop
+        if(obj.a){
+         
+            if(!obj.f)obj.f = `${e.target.textContent}`;
+            
+            isa  = true ;
+             
+            if(obj.b){ 
+                obj.result = operate(obj)
+                obj.a = null;
+                obj.b = null;
+                obj.f = null ;
+                obj.f = `${e.target.textContent}`;
+                obj.a = obj.result
+                isa = true;
+                populate(obj.a)
+                obj.result = null ;
+            }
+        }
+        
+    })
+})
+ 
+// clear
+clear.addEventListener('click',function() {
+    reset()
+populate('.....Wanna clac somthing !!.....')
+});
+equal.addEventListener('click',function(){ 
+    console.log(obj)
+    let res  = operate(obj)
+    reset();
+    populate(res)
+    obj.a = res ; 
+})
+
+
+
+function reset(){ 
+    obj = { 
+        a : null,
+        b : null , 
+        f : null , 
+        result : null
+    }
+
+}
+
+
+
+//put somthing on the screeen.
+function populate(pressed){
+    
+    let  display = document.querySelector('.result .box');
+    let value= pressed;
+    display.textContent=value;    
+}
+
+
+
+// falied trail 1 
 /*
     bnts.map(btn=>{
         btn.addEventListener('click',function(e){
@@ -102,10 +171,32 @@ digits.map(digit=>{
             console.log(obj)
         })
     });*/
-//put somthing on the screeen.
-function populate(pressed){
-    
-    let  display = document.querySelector('.result .box');
-    let value= pressed;
-    display.textContent=value;    
-}
+    // failed trail 2
+    /*operators.map(operator=>{
+    operator.addEventListner('click',function(e){
+
+       if(!obj.b){
+           obj.b = obj.a 
+           obj.a - null;
+           obj.f = e.target.textContent
+       }
+       else { 
+           obj.resultult =  operate(obj)
+           populate(obj.result)
+
+       }
+    })
+})
+digits.map(digit=>{ 
+    digit.addEventListner('click',function(e){
+        obj.a = parseInt(e.target.textContent)
+        populate(obj.a) 
+
+    })
+})
+equal.map(equal =>{ 
+    equal.addEventListner('click',function(){ 
+        populate(obj.result)
+        obj={a:null  , b:null , f:null , result: 0 }
+    });
+});*/
