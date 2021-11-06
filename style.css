@@ -73,3 +73,7 @@ button{
     background-color: rgb(210, 234, 241);
     width: 100%%;
 }
+
+.pressed{ 
+    background-color: rgb(36, 75, 77);
+}

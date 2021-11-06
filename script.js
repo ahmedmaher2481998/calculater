@@ -36,6 +36,9 @@ function operate(obj){
     else if (obj.f == '%'){ 
         res = obj.a % obj.b ;
     }
+    if(Number(res) === n && n % 1 !== 0){
+        Math.floor(res* 100) / 100
+    }
 
     return res;
 
@@ -77,7 +80,8 @@ digits.map(digit=>{
 })
 operators.map(operator=>{ 
     operator.addEventListener('click',function(e){
-        
+        e.target.classList.add('pressed')
+
         //if not a store f 
         if(!obj.a){ 
             populate("invalid input ");
@@ -122,14 +126,15 @@ document.querySelector('.sign-reverse').addEventListener('click',function(){
 // clear
 clear.addEventListener('click',function() {
     reset()
-populate('.....Wanna clac somthing !!.....')
+populate(0)
 });
 equal.addEventListener('click',function(){ 
     
     let res  = operate(obj)
     reset();
     populate(res)
-    obj.a = res ; 
+    obj.a = res ;
+    document.querySelector('.pressed').classList.remove(''.pressed') 
 })
 
 
