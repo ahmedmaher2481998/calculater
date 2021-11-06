@@ -56,9 +56,13 @@ let clear  = Array.from(document.querySelector('.clear'));
 let equal = Array.from(document.querySelector('.equal'));
 let point = Array.from(document.querySelector('.point'));
 operators.map(operator=>{
-    operator.addEventListner('click',function(){
-       if(!obj.b){ 
-           continue;
+    operator.addEventListner('click',function(e){
+
+       if(!obj.b){
+           obj.a = obj.a 
+           obj.a - null;
+           obj.f = e.target.textContent
+           
        }
        else { 
            operate(obj)
@@ -67,7 +71,12 @@ operators.map(operator=>{
        }
     })
 })
-digits
+digits.map(digit=>{ 
+    digit.addEventListner('click',function(e){
+        obj.a = e.target.textContent; 
+
+    })
+})
 /*
     bnts.map(btn=>{
         btn.addEventListener('click',function(e){
