@@ -39,16 +39,14 @@ function operate(num1,num2,operator){
     if(Number(res) === res && res % 1 !== 0){
         res = Math.floor(res* 1000) / 1000
     }
-
     return res;
-
 }
 // test 12 + 7 - 5 * 3 = 42
 let obj = {a:null, b:null ,f:'' , result:null};
 let btns = Array.from(document.querySelectorAll("button"))
 let digits = btns.filter(btn=>btn.className =="digit");
 let operators =  btns.filter(btn=>btn.className =="operate");
-let point = Array.from(document.querySelector('.point'));
+let point = document.querySelector('.dot');
 //put somthing on the screeen.
 function populate(pressed){
     
@@ -59,8 +57,19 @@ function populate(pressed){
 let digit1 = 0;
 let digit2 = 0;
 let result ;
+let dot;
 digits.map(digit=>{
-    digit.addEventListener('click',function(e){ 
+    digit.addEventListener('click',function(e){
+        if(dot && digit1){
+            digit1 += '.';
+            dot = false ;
+            unpress(); 
+        }
+        else if (dot){ 
+            digit1 = '.';
+            dot = false ; 
+            unpress();
+        } 
         if(!digit1){ 
             digit1 = digit.textContent;
         }
@@ -74,8 +83,9 @@ digits.map(digit=>{
         }
         else {
             populate(digit1);
-            digit1 = parseInt(digit1);
+            
         }
+        digit1 =  digit1.includes('.') ? parseFloat(digit1) : parseInt(digit1) ;  
     })
 })
 let operation;
@@ -105,7 +115,6 @@ operators.map(operator=>{
         
     })
 })
-
 document.querySelector('.clear').addEventListener('click',function(){ 
     digit1 = 0 ;
     digit2 = 0 ;
@@ -127,3 +136,7 @@ function unpress(){
         element.classList.remove('pressed')
     })
 }
+point.addEventListener('click',function(){ 
+   point.classList.add('pressed');
+   dot = true;
+})
