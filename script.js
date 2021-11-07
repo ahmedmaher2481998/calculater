@@ -19,48 +19,66 @@ object={
     b:20
 }
 */
-function operate(obj){
+function operate(array,operator){
     let res;
-    if(obj.f=='+') { 
-        res = add(obj.a,obj.b);
+    if(operator=='+') { 
+        res = add(array[0],array[1]);
     }
-    else if (obj.f == '-'){ 
-         res = substract(obj.a,obj.b)
+    else if (operator == '-'){ 
+         res = substract(array[0],array[1])
     }
-    else if (obj.f == '*'){ 
-         res = mutliply(obj.a,obj.b)
+    else if (operator == '*'){ 
+         res = mutliply(array[0],array[1])
     }
-    else if (obj.f == '/'){ 
-         res =  divide(obj.a,obj.b)
+    else if (operator == '/'){
+        if(array[1]==0){ 
+            alert('can not divide by zero!!')
+        } 
+         res =  divide(array[0],array[1])
     }
-    else if (obj.f == '%'){ 
-        res = obj.a % obj.b ;
+    else if (operator == '%'){ 
+        res = array[0] %array[1];
     }
-    if(Number(res) === n && n % 1 !== 0){
+    if(Number(res) === res && res % 1 !== 0){
         Math.floor(res* 100) / 100
     }
 
     return res;
 
 }
-
 // test 12 + 7 - 5 * 3 = 42
 let obj = {a:null, b:null ,f:'' , result:null};
-
-let btns = document.querySelectorAll("button")
-btns = Array.from(btns);
-
+let btns = Array.from(document.querySelectorAll("button"))
 let digits = btns.filter(btn=>btn.className =="digit");
 let operators =  btns.filter(btn=>btn.className =="operate");
 let clear  = document.querySelector('.clear');
 let equal = document.querySelector('.equal');
 let point = Array.from(document.querySelector('.point'));
-
 // evnt listner to digits 
 let isa ;
-digits.map(digit=>{ 
-    digit.addEventListener('click',function(e){ 
-       
+let nums = [];
+let numindex = 0;
+digits.map(digit=>{
+
+    digit.addEventListener('click',function(e){
+        if(!nums[numindex]){ 
+            nums[numindex] = e.target.textContent;
+            populate(nums[numindex])
+        }
+        else{
+            nums[numindex] = parseInt(nums[numindex] + e.target.textContent);
+            if(nums[numindex] > 10000000000) populate('very high number !!')
+            else populate(nums[numindex]);
+            
+        }
+        console.log(nums[numindex]) 
+
+
+
+
+
+
+        /*
         if(!obj.a )obj.a = e.target.textContent ; 
         else if (!isa) obj.a = obj.a + e.target.textContent
         obj.a = parseInt(obj.a)
@@ -74,12 +92,33 @@ digits.map(digit=>{
             else obj.b = obj.b + e.target.textContent;
             obj.b = parseInt(obj.b)
             populate(obj.b)
-        }
-        
+        }*/
     })
 })
+let operator ;
+let result;
 operators.map(operator=>{ 
     operator.addEventListener('click',function(e){
+        if(nums.length == 2 ){ 
+            result = operate(nums,operator)
+            numindex = 0 ;
+            operator = null ;
+        }
+        else if(nums.length == 1){ 
+            operator = e.target.textContent;
+            numindex ++;
+        }
+        else if (nums.length == 0){ 
+            populate("enter a number first")
+        }
+
+
+
+
+
+
+
+        /*
         e.target.classList.add('pressed')
 
         //if not a store f 
@@ -88,11 +127,8 @@ operators.map(operator=>{
         }
         // if a and b pop
         if(obj.a){
-         
             if(!obj.f)obj.f = `${e.target.textContent}`;
-            
             isa  = true ;
-             
             if(obj.b){ 
                 obj.result = operate(obj)
                 obj.a = null;
@@ -104,7 +140,7 @@ operators.map(operator=>{
                 populate(obj.a)
                 obj.result = null ;
             }
-        }
+        }*/
         
     })
 })
@@ -118,10 +154,7 @@ document.querySelector('.sign-reverse').addEventListener('click',function(){
             obj.a = -obj.a ; 
             populate(obj.a)
         }
-    }
-
-    
-    
+    }    
 }) 
 // clear
 clear.addEventListener('click',function() {
@@ -134,11 +167,8 @@ equal.addEventListener('click',function(){
     reset();
     populate(res)
     obj.a = res ;
-    document.querySelector('.pressed').classList.remove(''.pressed') 
+    document.querySelector('.pressed').classList.remove('.pressed') 
 })
-
-
-
 function reset(){ 
     obj = { 
         a : null,
@@ -146,11 +176,7 @@ function reset(){
         f : null , 
         result : null
     }
-
 }
-
-
-
 //put somthing on the screeen.
 function populate(pressed){
     
@@ -158,9 +184,6 @@ function populate(pressed){
     let value= pressed;
     display.textContent=value;    
 }
-
-
-
 // falied trail 1 
 /*
     bnts.map(btn=>{
