@@ -140,3 +140,9 @@ point.addEventListener('click',function(){
    point.classList.add('pressed');
    dot = true;
 })
+document.querySelector('.sign-reverse').addEventListener('click',function(){ 
+    if(digit1){ 
+        digit1 = - digit1 ; 
+        populate(digit1)
+    }
+})
