@@ -12,13 +12,7 @@ function divide(a,b){
     return a / b ;
 }
 //funcation that takes object {f:"operatro sign ",a:first num , b: second num}
-/*
-object={ 
-    f:'+',
-    a:10,
-    b:20
-}
-*/
+// first operand num 1 , second oprand num2 then operator 
 function operate(num1,num2,operator){
     let res;
     if(operator=='+') { 
@@ -43,7 +37,7 @@ function operate(num1,num2,operator){
         res = num1 %num2;
     }
     if(Number(res) === res && res % 1 !== 0){
-        Math.floor(res* 100) / 100
+        res = Math.floor(res* 1000) / 1000
     }
 
     return res;
@@ -86,23 +80,27 @@ digits.map(digit=>{
 })
 let operation;
 operators.map(operator=>{ 
-    operator.addEventListener('click',function(){ 
+    operator.addEventListener('click',function(){
+        let operatorPressed = true;
+        if(operatorPressed){
+            unpress();
+
+        }
+        operator.classList.add('pressed')
         if(!digit2){ 
             operation = operator.textContent;
             digit2 = digit1 ; 
             digit1 = 0 ; 
         }
-        else if (!operation){ 
+        else if (!operation){
             operation = operator.textContent
         }
         else{
-            
             result = operate(digit2,digit1,operation);
             populate(result)
             digit1 = 0 ;
             digit2 = result;
             operation = operator.textContent; 
-
         }
         
     })
@@ -117,13 +115,15 @@ document.querySelector('.clear').addEventListener('click',function(){
 })
 document.querySelector('.equal').addEventListener('click',function(){
     result = operate(digit2,digit1,operation);
+    unpress()
     populate(result)
     digit2 = result;
-            
-   console.log(digit2,digit1,operation,result)
-    populate(digit2);
     digit1  = 0 ;
     result = 0 ;
     operation = null ; 
-
 })
+function unpress(){ 
+    Array.from(document.querySelectorAll('.pressed')).map(element =>{ 
+        element.classList.remove('pressed')
+    })
+}
