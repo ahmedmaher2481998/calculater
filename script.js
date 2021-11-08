@@ -42,7 +42,7 @@ function operate(num1,num2,operator){
     return res;
 }
 // test 12 + 7 - 5 * 3 = 42
-Array.from(document.querySelectorAll("button"))
+let btns = Array.from(document.querySelectorAll("button"))
 let digits = btns.filter(btn=>btn.className =="digit");
 let operators =  btns.filter(btn=>btn.className =="operate");
 let point = document.querySelector('.dot');
