@@ -42,8 +42,7 @@ function operate(num1,num2,operator){
     return res;
 }
 // test 12 + 7 - 5 * 3 = 42
-let obj = {a:null, b:null ,f:'' , result:null};
-let btns = Array.from(document.querySelectorAll("button"))
+Array.from(document.querySelectorAll("button"))
 let digits = btns.filter(btn=>btn.className =="digit");
 let operators =  btns.filter(btn=>btn.className =="operate");
 let point = document.querySelector('.dot');
@@ -141,6 +140,7 @@ point.addEventListener('click',function(){
    dot = true;
 })
 document.querySelector('.sign-reverse').addEventListener('click',function(){ 
+    unpress();
     if(digit1){ 
         digit1 = - digit1 ; 
         populate(digit1)
