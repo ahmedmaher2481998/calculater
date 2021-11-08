@@ -145,4 +145,8 @@ document.querySelector('.sign-reverse').addEventListener('click',function(){
         digit1 = - digit1 ; 
         populate(digit1)
     }
+    if(!digit1){ 
+        digit2 = -digit2;
+        populate(digit2)
+    }
 })
